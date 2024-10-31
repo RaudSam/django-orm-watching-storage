@@ -13,14 +13,14 @@ def storage_information_view(request):
         time_then = visit.entered_at
         author = visit.passcard
 
-    non_closed_visit = [
-        {
-            'who_entered': author.owner_name,
-            'entered_at': time_then,
-            'duration': formatted_duration,
-        }
-    ]
-    non_closed_visits.append(non_closed_visit)
+        non_closed_visit = [
+            {
+                'who_entered': author.owner_name,
+                'entered_at': time_then,
+                'duration': formatted_duration,
+            }
+        ]
+        non_closed_visits.append(non_closed_visit)
 
     context = {
         'non_closed_visits': non_closed_visits
