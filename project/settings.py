@@ -1,18 +1,18 @@
 import os
-from dotenv import load_dotenv
+from environs import Env
 
-
-load_dotenv()
+env = Env()
+env.read_env()
 
 
 DATABASES = {
     'default': {
-        'ENGINE': os.environ['DB_ENGINE'],
-        'HOST': os.environ['DB_HOST'],
-        'PORT': os.environ['DB_PORT'],
-        'NAME': os.environ['DB_NAME'],
-        'USER': os.environ['DB_USER'],
-        'PASSWORD': os.environ['DB_PASSWORD'],
+        'ENGINE': env.str('DB_ENGINE'),
+        'HOST': env.str('DB_HOST'),
+        'PORT': env.int('DB_PORT'),
+        'NAME': env.str('DB_NAME'),
+        'USER': env.str('DB_USER'),
+        'PASSWORD': env.str('DB_PASSWORD'),
     }
 }
 
@@ -20,14 +20,15 @@ INSTALLED_APPS = ['datacenter']
 
 SECRET_KEY = 'REPLACE_ME'
 
-DEBUG = True
+DEBUG = env.bool('DEBUG', default=False)
 
 ROOT_URLCONF = 'project.urls'
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=[])
 
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
