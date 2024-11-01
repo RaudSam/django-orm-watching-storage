@@ -1,8 +1,8 @@
 from django.utils.timezone import localtime, now
 
 
-seconds_in_hour = 3600
-seconds_in_minute = 60
+SECONDS_IN_HOUR = 3600
+SECONDS_IN_MINUTE = 60
 
 
 def get_duration(visit):
@@ -18,15 +18,15 @@ def get_duration(visit):
 
 def format_duration(duration):
     total_seconds = int(duration.total_seconds())
-    hours = total_seconds // seconds_in_hour
-    minutes = (total_seconds - hours * seconds_in_hour) // seconds_in_minute
+    hours = total_seconds // SECONDS_IN_HOUR
+    minutes = (total_seconds - hours * SECONDS_IN_HOUR) // SECONDS_IN_MINUTE
     return f'{hours}ч {minutes}мин'
 
 
 def is_visit_long(duration):
     seconds = duration.total_seconds()
 
-    total_minutes = seconds/seconds_in_minute
+    total_minutes = seconds/SECONDS_IN_MINUTE
 
     long_visit_minutes = 60
     is_visit_long = total_minutes > long_visit_minutes
